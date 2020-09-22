@@ -119,6 +119,14 @@ void execute(char *command)
         overkill();
         exit(0);
     }
+    else if(!strcmp(token,"fg"))
+    {
+        if(token != NULL)
+        {
+            token = strtok(NULL,"");
+        }
+        fg(token);
+    }
     else
     {
         get_command(temp);   

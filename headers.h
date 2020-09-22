@@ -43,6 +43,8 @@ void unset_env(char *string);
 void jobs();
 void kjob(char *string);
 void overkill();
+void fg(char *string);
+
 
 //for process:
 struct proc

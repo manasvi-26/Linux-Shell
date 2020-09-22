@@ -1,20 +1,20 @@
-clear
-cd
-cdcdcd
-cdcd
-cd ..
-cd ..
-cd ,,
-cd /
-cd ..
-cd ./
-cd ..
-cd ..
-cd ..
-cd ..
-sudo snap install fzf-carroarmato0
-cd ..
-cd ~
-cd /
-cme
-cd home
+jobs
+gedit &
+jobs
+fg 1
+jobs
+gedit &
+jobs
+gedit &
+fg 1
+jobs
+gedit &
+fg 1
+gedit &
+fg 1
+jobs
+gedit &
+jobs
+fg 1
+jobs
+fg 1
