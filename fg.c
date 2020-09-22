@@ -1,5 +1,5 @@
 #include "headers.h"
-
+//haha random
 void fg(char *string)
 {
     char *token;
