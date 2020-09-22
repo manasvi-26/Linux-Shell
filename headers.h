@@ -43,7 +43,11 @@ void unset_env(char *string);
 void jobs();
 void kjob(char *string);
 void overkill();
-void fg(char *string);
+
+void get_job(char*string,int type);
+
+void fg(int job_number,int pid, char *name);
+void bg(int job_number,int pid, char *name);
 
 
 //for process:

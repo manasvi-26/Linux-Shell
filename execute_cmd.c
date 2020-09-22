@@ -125,7 +125,15 @@ void execute(char *command)
         {
             token = strtok(NULL,"");
         }
-        fg(token);
+        get_job(token,1);
+    }
+    else if(!strcmp(token,"bg"))
+    {
+        if(token != NULL)
+        {
+            token = strtok(NULL,"");
+        }
+        get_job(token,0);
     }
     else
     {
