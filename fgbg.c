@@ -38,10 +38,10 @@ void get_job(char *string,int type)
             strcpy(name, bg_process[i].p_name);
             pid = bg_process[i].pid;
 
-            bg_process[i].pid = -1;
-            process_cnt--;
             if(type)
             {
+                bg_process[i].pid = -1;
+                process_cnt--;
                 fg(job_number,pid,name);
             }
             else
