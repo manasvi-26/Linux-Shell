@@ -2,9 +2,16 @@
 
 void redirect(char *string)
 {
+    char com[256] = "";
+    strcpy(com,string);
+
+
     char *arg[50];
     char *token;
     token = strtok(string," \t\n");
+    
+    
+
     int p = 0;
     while(token != NULL)
     {
@@ -21,8 +28,6 @@ void redirect(char *string)
 
     int f;
     int type = -1;
-
-    
 
 
     for(int i=0;i<50;i++)
@@ -76,14 +81,8 @@ void redirect(char *string)
         }
     }
 
-   
-
-    if(in == NULL)
-    {
-        printf("Enter Input File\n");
-        return ;
-    }
     f = 0;
+  /*  
     for(int i=0;i<50;i++)
     {
         if(!strcmp(arg[i],"<"))f = 1;
@@ -91,14 +90,23 @@ void redirect(char *string)
         if(!strcmp(arg[i],">>"))f = 1;
         if(f)
         {
-            arg[i] = NULL;
             break;
         }
     }
+*/
+    for(int i=0;i<strlen(com);i++)
+    {
+        
+        if(com[i] == '<')f = 1;
+        if(com[i]== '>')f = 1;
+        if(f){com[i]='\0';break;}
+    }
     
+    //printf("%s",com);
 
     pid_t pid;
     pid = fork();
+      
 
     if(pid < 0)
     {
@@ -125,12 +133,7 @@ void redirect(char *string)
             dup2(f2,1);
         }
 
-        int check =  execvp(arg[0],arg);
-        if(check < 0)
-        {
-            printf("supunde: command not found: %s\n",arg[0]);   
-        }
-
+        execute(com);
         exit(0);
         
     }
@@ -139,6 +142,5 @@ void redirect(char *string)
     {
         waitpid(pid,NULL,WUNTRACED);
     }
-
 
 }

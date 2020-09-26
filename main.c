@@ -107,7 +107,8 @@ void append(char *string)
 }
 
 //void ctrl_c_handler(int sig_num) 
-//{ make	
+//{ 
+//    
 //	return;
 //}
 

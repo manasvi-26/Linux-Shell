@@ -1,17 +1,50 @@
 #include "headers.h"
 
-
-void execute(char *command)
+int check_piping(char *command)
 {
-    char temp[1024] = "";
-    strcpy(temp,command);
+    int f = 0;
+    for(int i=0;i<strlen(command);i++)
+    {
+        if(command[i] == '|')f = 1;
+    }
+    return f;
+}
+
+int check_redirection(char* command)
+{
     
     int f = 0;
     for(int i=0;i<strlen(command);i++)
     {
+        if(command[i] == '>')f = 1;
+        if(command[i] == '<')f = 1;
+    } 
+    return f;
+}
+
+void execute(char *command)
+{
+    
+    char temp[1024] = "";
+    strcpy(temp,command);
+
+    int f = 0;
+
+    if(check_piping(command))
+    {
+        piping(command);
+        return;
+    }
+    
+    if(check_redirection(command))
+    {
+        redirect(command);
+        return;
+    }
+
+    for(int i=0;i<strlen(command);i++)
+    {
         if(command[i] == '&')f = 1;
-        if(command[i] == '>')f = 2;
-        if(command[i] == '<')f = 2;
     }   
 
     if(f == 1) 
@@ -19,12 +52,6 @@ void execute(char *command)
         get_command(command);
         fflush(stdout);
         return ;
-    }
-
-    if(f == 2)
-    {
-        redirect(command);
-        return;
     }
 
     char *token;
