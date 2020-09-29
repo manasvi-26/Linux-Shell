@@ -31,6 +31,7 @@ void pinfo(char *string);
 
 void get_command(char* string);
 void signal_handler(int n);
+void ctrlc_handler(int sig);
 void print_prompt();
 void GetDir(char* dir);
 void load_history(char*command);
@@ -61,6 +62,7 @@ struct proc
 
 int job;
 
+struct proc ForeProc;
 
 struct proc bg_process[1024];
 

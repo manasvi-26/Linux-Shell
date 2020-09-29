@@ -36,3 +36,11 @@ void signal_handler(int n)
         }
     }
 }
+
+
+void ctrlc_handler(int sig)
+{
+    if(ForeProc.pid)
+        kill(ForeProc.pid,sig);
+    return;
+}

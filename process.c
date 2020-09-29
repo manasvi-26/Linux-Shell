@@ -51,14 +51,18 @@ void foreground(char *arg[])
         
         if(check < 0)
         {
-            printf("supunde: command not found: %s\n",arg[0]);
+            fprintf(stderr,"supunde: command not found: %s\n",arg[0]);   
         }
 
         exit(0);
     }
     if(pid > 0)
     {
+        ForeProc.pid = pid;
+        strcpy(ForeProc.p_name,arg[0]);
+
         waitpid(pid,NULL,WUNTRACED);
+        ForeProc.pid = 0;
     }       
 }
 
@@ -81,7 +85,7 @@ void background(char *arg[])
         int check =  execvp(arg[0],arg);
         if(check < 0)
         {
-            printf("supunde: command not found: %s\n",arg[0]);   
+            fprintf( stderr, "supunde: command not found: %s\n",arg[0]);
         }
 
         exit(0);

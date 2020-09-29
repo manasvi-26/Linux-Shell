@@ -127,7 +127,7 @@ int main()
     
 
     signal(SIGCHLD,signal_handler); 
-    //signal(SIGINT, ctrl_c_handler);
+    signal(SIGINT, ctrlc_handler);
 
     while(1)
     {
