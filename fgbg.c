@@ -21,7 +21,7 @@ void get_job(char *string,int type)
 
     if(job_number >= process_cnt)
     {
-        printf("Invalid job number - %d \n",job_number);
+        printf("Invalid job number : %d \n",job_number);
         return ;
     }
 
@@ -40,8 +40,6 @@ void get_job(char *string,int type)
 
             if(type)
             {
-                bg_process[i].pid = -1;
-                process_cnt--;
                 fg(job_number,pid,name);
             }
             else
@@ -57,31 +55,34 @@ void get_job(char *string,int type)
 
 void fg(int job_number,int pid, char *name)
 {
+    ForeProc.pid = pid;
    
-    printf("[%d]   running    %s\n",job_number,name);
+    printf("[%d]   running    %s \n,",job_number,name);
+
+    
+    kill(pid,SIGCONT);
 
     signal(SIGTTIN,SIG_IGN);
     signal(SIGTTOU,SIG_IGN);
-    tcsetpgrp(STDOUT_FILENO,pid);
 
-    kill(pid,SIGCONT);
+    //signal(SIGTSTP,ctrlz_handler);
     
+    tcsetpgrp(STDIN_FILENO,pid);
+
     int status;
     waitpid(pid,&status,WUNTRACED);
 
     //check if process has been stoppped by a signal(ctrl Z):
     if(WIFSTOPPED(status))
     {
-        printf("[%d]   suspended    %s",job_number,name);
-        process_cnt++;
-        strcpy(bg_process[job].p_name,name);
-        bg_process[job].pid = pid;
-        job++;
+        printf("[%d]   suspended    %s\n",job_number,name);
     }
+    Check(pid);
 
 
     int shell_pgrp = getpgrp();
-    tcsetpgrp(STDOUT_FILENO,shell_pgrp);
+    tcsetpgrp(STDIN_FILENO,shell_pgrp);
+    
     signal(SIGTTIN,SIG_DFL);
     signal(SIGTTOU,SIG_DFL);
     return;

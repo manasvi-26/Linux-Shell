@@ -30,13 +30,15 @@ void ls(char *string);
 void pinfo(char *string);
 
 void get_command(char* string);
-void signal_handler(int n);
-void ctrlc_handler(int sig);
+
 void print_prompt();
 void GetDir(char* dir);
 void load_history(char*command);
 void history(char * string);
 void nightswatch(char *arg);
+
+void signal_handler(int n);
+void Check(int pid);
 
 void redirect(char *string);
 void set_env(char *string);
@@ -72,6 +74,7 @@ int process_cnt;
 //for history:
 char history_path[1024];
 char last_command[1024];
+int Shell;
 FILE * fp;
 
 

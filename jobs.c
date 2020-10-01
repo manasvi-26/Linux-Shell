@@ -10,9 +10,11 @@ void get_state(char *pid)
     FILE *f;
     f = fopen(stats,"r");
 
+
     char buffer[1024] = "";
     fread(buffer,sizeof(char),sizeof(buffer),f);
 
+    
     char *token;
     token = strtok(buffer," \t\n");
 
@@ -35,6 +37,7 @@ void get_state(char *pid)
             }
         }
     }
+    
 }
 
 void jobs()

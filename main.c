@@ -25,6 +25,7 @@ void init()
     process_cnt = 1;
     job = 0;
 
+    Shell = getpid();
     fflush(stdout);
 
     
@@ -127,7 +128,12 @@ int main()
     
 
     signal(SIGCHLD,signal_handler); 
-    signal(SIGINT, ctrlc_handler);
+   
+    
+    //signal(SIGTSTP,ctrlz_handler);
+    
+    signal(SIGINT, SIG_IGN);
+    signal(SIGTSTP,SIG_IGN);
 
     while(1)
     {

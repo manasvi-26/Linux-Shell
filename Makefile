@@ -1,3 +1,3 @@
 all: *.c
-		gcc -o supunde *.c
+		gcc -o  supunde *.c
 		
