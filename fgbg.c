@@ -93,8 +93,6 @@ void fg(int job_number,int pid, char *name)
         Delete(pid);
     }
 
-
-
     int shell_pgrp = getpgrp();
     tcsetpgrp(STDIN_FILENO,shell_pgrp);
     
