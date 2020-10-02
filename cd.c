@@ -19,6 +19,7 @@ void cd(char *Args)
 
     if (count > 1)
     {
+        face = 0;
         printf("Too many arguments\n");
         return ;
     }
@@ -41,14 +42,29 @@ void cd(char *Args)
         strcat(new,&token[1]);
         if(chdir(new) == -1)
         {
+            face = 0;
             perror("Error");
+            return;
         }
+
+        getcwd(last_workingDirectory,sizeof(last_workingDirectory));
+        GetDir(last_workingDirectory);
+
+    }
+    else if(token[0] == '-' && token[1] == '\0')
+    {
+        printf("%s\n",last_workingDirectory);
     }
     else
     {   
         if(chdir(token) == -1)
         {
+            face = 0;
             perror("Error");
+            return;
         }
+
+        getcwd(last_workingDirectory,sizeof(last_workingDirectory));
+        GetDir(last_workingDirectory);
     }    
 }

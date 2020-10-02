@@ -37,6 +37,7 @@ void redirect(char *string)
         {
             if(arg[i+1] == NULL)
             {
+                face = 0;
                 printf("Input File Not given\n");
                 return;
             }
@@ -44,6 +45,7 @@ void redirect(char *string)
             f = open(arg[i+1],O_RDONLY);
             if(f < 0)
             {
+                face = 0;
                 printf("supunde : %s : No such File or Directory\n",arg[i+1]);
                 return;
             }
@@ -55,6 +57,7 @@ void redirect(char *string)
         {
             if(arg[i+1] == NULL)
             {
+                face = 0;
                 printf("Output File Not given\n");
                 return;
             }
@@ -69,6 +72,7 @@ void redirect(char *string)
         {
             if(arg[i+1] == NULL)
             {
+                face = 0;
                 printf("Output File Not given\n");
                 return;
             }
@@ -110,6 +114,7 @@ void redirect(char *string)
 
     if(pid < 0)
     {
+    
         perror("Error in forking");
         return;
     }

@@ -34,30 +34,16 @@ void get_command(char *string)
     }
 }
 
-void Check (int pid)
+void Delete(int pid)
 {
-    char stats[50] = "";
-    strcpy(stats, "/proc/");
-    char pd[10] = "";
-    sprintf(pd,"%d",pid);
-    strcat(stats, pd);
-    strcat(stats, "/stat");
-    
-    FILE *f;
-    f = fopen(stats, "r");
-    
-    
-    if (f == NULL)
+    for (int i = 0; i < 1024; i++)
     {
-        for (int i = 0; i < 1024; i++)
+        if (bg_process[i].pid == pid)
         {
-            if (bg_process[i].pid == pid)
-            {
-                process_cnt--;
-                strcpy(bg_process[i].p_name, "");
-                bg_process[i].pid = -1;
-                break;
-            }
+            process_cnt--;
+            strcpy(bg_process[i].p_name, "");
+            bg_process[i].pid = -1;  
+            return;
         }
     }
 }
@@ -69,6 +55,7 @@ void foreground(char *arg[])
     if (pid < 0)
     {
         printf("ERROR: Forking child process failed \n");
+        exit(EXIT_FAILURE);
         return;
     }
     if (pid == 0) //child process
@@ -84,6 +71,7 @@ void foreground(char *arg[])
         if (check < 0)
         {
             fprintf(stderr, "supunde: command not found: %s\n", arg[0]);
+            exit(EXIT_FAILURE);
         }
 
         exit(0);
@@ -104,18 +92,30 @@ void foreground(char *arg[])
         tcsetpgrp(STDIN_FILENO, pid);
 
         strcpy(ForeProc.p_name, arg[0]);
+        int status;
+        waitpid(pid, &status, WUNTRACED);        
 
-        waitpid(pid, NULL, WUNTRACED);
-
-        Check(pid);
-
+        if(WIFSTOPPED(status))
+        {
+            face = 0;
+        }        
+        //else Delete(pid,status);
+        else if(WIFEXITED(status))
+        {
+            face = 1;
+            Delete(pid);
+        }
+        else if(!WIFEXITED(status))
+        {
+            face = 0;
+            Delete(pid);
+        }
+        
         int shell_pgrp = getpgrp();
         tcsetpgrp(STDIN_FILENO, shell_pgrp);
 
         signal(SIGTTIN, SIG_DFL);
         signal(SIGTTOU, SIG_DFL);
-
-        
     }
 }
 
@@ -127,6 +127,7 @@ void background(char *arg[])
     if (pid < 0)
     {
         printf("ERROR: Forking child process failed \n");
+        exit(EXIT_FAILURE);
         return;
     }
 
@@ -141,6 +142,7 @@ void background(char *arg[])
         if (check < 0)
         {
             fprintf(stderr, "supunde: command not found: %s\n", arg[0]);
+            exit(EXIT_FAILURE);
         }
 
         exit(0);

@@ -27,7 +27,7 @@ void init()
 
     Shell = getpid();
     fflush(stdout);
-
+    face = 1;
     
 }
 
@@ -41,9 +41,9 @@ void GetDir(char* dir)
         if(home[i] != currDir[i])
         {
             flag = 1;
+            break;
         }
     }
-
 
     if(flag)
     {
@@ -66,6 +66,7 @@ void GetDir(char* dir)
 
 void print_prompt()
 {
+
     RED printf("<"); reset()
     Cyan  printf("%s@%s:",user,syst); reset()
     char dir[1024] = "";
@@ -76,13 +77,12 @@ void print_prompt()
 }
 
 
-
 char *get_input()
 {
     size_t inp_sz = 0;
     char *input_line = NULL;
     nread = (getline(&input_line, &inp_sz, stdin));
-
+    face = 1;
     return input_line;
 
 }
@@ -107,13 +107,6 @@ void append(char *string)
     }
 }
 
-//void ctrl_c_handler(int sig_num) 
-//{ 
-//    
-//	return;
-//}
-
-
 int main()
 {
     init();
@@ -122,6 +115,8 @@ int main()
     gethostname(syst,sizeof(syst));
     getcwd(home,sizeof(home));
 
+    strcpy(last_workingDirectory,"~");
+
     strcpy(history_path,home);
     strcat(history_path,"/history.txt"); 
     strcpy(last_command,"");
@@ -129,8 +124,6 @@ int main()
 
     signal(SIGCHLD,signal_handler); 
    
-    
-    //signal(SIGTSTP,ctrlz_handler);
     
     signal(SIGINT, SIG_IGN);
     signal(SIGTSTP,SIG_IGN);
@@ -188,6 +181,10 @@ int main()
         }
 
         append(history_input);
-    }
 
+        RED 
+        if(face == 1)printf(":')");
+        else printf(":'(");
+        reset();
+    }
 }

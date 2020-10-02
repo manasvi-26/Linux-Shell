@@ -54,6 +54,7 @@ void ls_print(char *Path)
 
     if(!dir)
     {
+        face = 0;
         perror("Cant open Directory");
         return ;
     }
@@ -93,6 +94,7 @@ void ls_print(char *Path)
 
             if(lstat(file,&filestat) <0)
             {
+                face = 0;
                 perror("Error");
                 return ;
             }

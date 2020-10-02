@@ -77,6 +77,7 @@ void newborn(char *time)
 
 void invalid()
 {
+    face = 0;
     RED printf("Invalid input\n"); reset();
 
     printf("Usage: nightswatch [options] <command>\n");

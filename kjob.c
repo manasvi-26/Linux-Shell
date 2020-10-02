@@ -24,6 +24,7 @@ void kjob(char *string)
 
         if(job_number >= process_cnt)
         {
+            face = 0;
             printf("Invalid job number - %d \n",job_number);
             return;
         }
@@ -36,6 +37,7 @@ void kjob(char *string)
                 int check = kill(bg_process[i].pid,signal);
                 if(check == -1)
                 {
+                    face = 0;
                     perror("Error");
                 }
                 process_cnt--;
@@ -46,6 +48,7 @@ void kjob(char *string)
     }
     else
     {
+        face = 0;
         RED printf("Supunde : Invalid Syntax\n");reset();
         Magenta printf("Usage : ");reset();
         printf("kjob <job number> <signal number>\n");

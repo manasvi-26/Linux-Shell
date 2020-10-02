@@ -2,8 +2,10 @@
 
 void get_job(char *string,int type)
 {
+    
     if(string == NULL)
     {
+        face = 0;
         printf("Enter job number\n");
         return;
     }
@@ -13,6 +15,7 @@ void get_job(char *string,int type)
 
     if(token == NULL)
     {
+        face = 0;
         printf("Enter job number\n");
         return;
     }
@@ -21,6 +24,7 @@ void get_job(char *string,int type)
 
     if(job_number >= process_cnt)
     {
+        face = 0;
         printf("Invalid job number : %d \n",job_number);
         return ;
     }
@@ -40,6 +44,7 @@ void get_job(char *string,int type)
 
             if(type)
             {
+                face = 0;
                 fg(job_number,pid,name);
             }
             else
@@ -77,7 +82,17 @@ void fg(int job_number,int pid, char *name)
     {
         printf("[%d]   suspended    %s\n",job_number,name);
     }
-    Check(pid);
+    else if(WIFEXITED(status))
+    {
+        face = 1;
+        Delete(pid);
+    }
+    else if(!WIFEXITED(status))
+    {
+        face = 0;
+        Delete(pid);
+    }
+
 
 
     int shell_pgrp = getpgrp();

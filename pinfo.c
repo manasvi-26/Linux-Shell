@@ -29,6 +29,7 @@ void pinfo(char * string)
 
     if(!f)  
     {
+        face = 0;
         printf("Process with ID %s does not exist\n", pid);
         return ;
     }

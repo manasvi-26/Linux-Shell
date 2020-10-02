@@ -38,7 +38,8 @@ void history(char * string);
 void nightswatch(char *arg);
 
 void signal_handler(int n);
-void Check(int pid);
+
+void Delete(int pid);
 
 void redirect(char *string);
 void set_env(char *string);
@@ -54,6 +55,7 @@ void bg(int job_number,int pid, char *name);
 
 void piping(char *string);
 
+int face;
 
 //for process:
 struct proc
@@ -67,7 +69,7 @@ int job;
 struct proc ForeProc;
 
 struct proc bg_process[1024];
-
+char last_workingDirectory[1024];
 
 int process_cnt;
 

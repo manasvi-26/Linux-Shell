@@ -1,20 +1,20 @@
+gedit
+gedit
 jobs
-gedit &
+fg 1
+gedit
+fg 1
 jobs
 fg 1
 jobs
-gedit &
-jobs
-gedit &
-fg 1
-jobs
-gedit &
-fg 1
-gedit &
-fg 1
-jobs
-gedit &
+gedit
+geditgedit
+gedit
 jobs
 fg 1
 jobs
 fg 1
+jobs
+ls | lol | wc
+[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D
+clear
