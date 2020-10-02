@@ -115,7 +115,7 @@ int main()
     gethostname(syst,sizeof(syst));
     getcwd(home,sizeof(home));
 
-    strcpy(last_workingDirectory,"~");
+    strcpy(last_workingDirectory,home);
 
     strcpy(history_path,home);
     strcat(history_path,"/history.txt"); 

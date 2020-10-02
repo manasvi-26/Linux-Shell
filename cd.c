@@ -35,6 +35,7 @@ void cd(char *Args)
  
     if (token[0] == '~')
     {
+        getcwd(last_workingDirectory,sizeof(last_workingDirectory));
         char new[1024] = "";
         
         strcpy(new, home);
@@ -47,16 +48,20 @@ void cd(char *Args)
             return;
         }
 
-        getcwd(last_workingDirectory,sizeof(last_workingDirectory));
-        GetDir(last_workingDirectory);
+        
 
     }
     else if(token[0] == '-' && token[1] == '\0')
     {
-        printf("%s\n",last_workingDirectory);
+        chdir(last_workingDirectory);
+        char temp[1024] = "";
+        strcpy(temp,last_workingDirectory);
+        GetDir(temp);
+        printf("%s\n",temp);
     }
     else
     {   
+        getcwd(last_workingDirectory,sizeof(last_workingDirectory));
         if(chdir(token) == -1)
         {
             face = 0;
@@ -64,7 +69,7 @@ void cd(char *Args)
             return;
         }
 
-        getcwd(last_workingDirectory,sizeof(last_workingDirectory));
-        GetDir(last_workingDirectory);
+       
+        
     }    
 }
