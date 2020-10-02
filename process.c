@@ -100,12 +100,12 @@ void foreground(char *arg[])
             face = 0;
         }        
         //else Delete(pid,status);
-        else if(WIFEXITED(status))
+        else if(WIFEXITED(status) && !(WEXITSTATUS(status)))
         {
             face = 1;
             Delete(pid);
         }
-        else if(!WIFEXITED(status))
+        else
         {
             face = 0;
             Delete(pid);

@@ -7,9 +7,7 @@ void pinfo(char * string)
 
     if(string == NULL)
     {
-        int p = getpid();
-        
-        sprintf(pid,"%d",p);
+        sprintf(pid,"%d",Shell);
     }
     else
     {

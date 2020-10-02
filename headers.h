@@ -14,6 +14,7 @@
 #include <grp.h>
 #include <time.h>
 #include <fcntl.h>
+#include <errno.h>
 
 
 char home[1024];
